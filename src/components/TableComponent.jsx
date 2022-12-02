@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import profileImg from "./../assets/profile.jpg";
 import { RiArrowUpDownFill } from "react-icons/ri";
 
-const TableComponent = ({ data }) => {
+const TableComponent = ({ data, tableConfig }) => {
   const [tableData, setTableData] = useState(data);
   const [order, setOrder] = useState("DSC");
 
@@ -85,54 +85,83 @@ const TableComponent = ({ data }) => {
     <table>
       <thead>
         <tr>
-          <th>
-            Name
-            <RiArrowUpDownFill
-              onClick={sortNameHandler}
-              className="arrow"
-            ></RiArrowUpDownFill>
-          </th>
-          <th>
-            City
-            <RiArrowUpDownFill
-              onClick={() => sortHandler("city")}
-              className="arrow"
-            ></RiArrowUpDownFill>
-          </th>
-          <th>
-            Email Address
-            <RiArrowUpDownFill
-              onClick={() => sortHandler("email")}
-              className="arrow"
-            ></RiArrowUpDownFill>
-          </th>
-          <th>
-            Joining Date
-            <RiArrowUpDownFill
-              onClick={sortDateHandler}
-              className="arrow"
-            ></RiArrowUpDownFill>
-          </th>
-          <th>
-            Role
-            <RiArrowUpDownFill
-              onClick={() => sortHandler("role")}
-              className="arrow"
-            ></RiArrowUpDownFill>
-          </th>
+          {tableConfig[0].name.show && (
+            <th>
+              Name
+              {tableConfig[0].name.sort && (
+                <RiArrowUpDownFill
+                  onClick={sortNameHandler}
+                  className="arrow"
+                ></RiArrowUpDownFill>
+              )}
+            </th>
+          )}
+
+          {tableConfig[0].city.show && (
+            <th>
+              City
+              {tableConfig[0].city.sort && (
+                <RiArrowUpDownFill
+                  onClick={() => sortHandler("city")}
+                  className="arrow"
+                ></RiArrowUpDownFill>
+              )}
+            </th>
+          )}
+
+          {tableConfig[0].email.show && (
+            <th>
+              Email Address
+              {tableConfig[0].email.sort && (
+                <RiArrowUpDownFill
+                  onClick={() => sortHandler("email")}
+                  className="arrow"
+                ></RiArrowUpDownFill>
+              )}
+            </th>
+          )}
+          {tableConfig[0].joiningDate.show && (
+            <th>
+              Joining Date
+              {tableConfig[0].joiningDate.sort && (
+                <RiArrowUpDownFill
+                  onClick={sortDateHandler}
+                  className="arrow"
+                ></RiArrowUpDownFill>
+              )}
+            </th>
+          )}
+          {tableConfig[0].role.show && (
+            <th>
+              Role
+              {tableConfig[0].role.sort && (
+                <RiArrowUpDownFill
+                  onClick={() => sortHandler("role")}
+                  className="arrow"
+                ></RiArrowUpDownFill>
+              )}
+            </th>
+          )}
         </tr>
       </thead>
       <tbody>
         {tableData.map((data, index) => (
           <tr key={index}>
-            <td>
-              <img src={profileImg} alt="profile" />
-              <span>{data.person.name}</span>
-            </td>
-            <td>{data.city}</td>
-            <td>{data.email}</td>
-            <td>{data.joiningDate}</td>
-            <td>{data.role}</td>
+            {tableConfig[0].name.show && (
+              <td>
+                <img src={profileImg} alt="profile" />
+                <span>{data.person.name}</span>
+              </td>
+            )}
+            {tableConfig[0].city.show && <td>{data.city}</td>}
+            {tableConfig[0].email.show && (
+              <td>
+                <a href="mailto:">{data.email}</a>
+              </td>
+            )}
+
+            {tableConfig[0].joiningDate.show && <td>{data.joiningDate}</td>}
+            {tableConfig[0].role.show && <td>{data.role}</td>}
           </tr>
         ))}
       </tbody>

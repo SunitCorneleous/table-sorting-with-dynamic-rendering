@@ -1,0 +1,24 @@
+[
+    {
+        "name": {
+            "show": true,
+            "sort": true
+        },
+        "city": {
+            "show": true,
+            "sort": true
+        },
+        "email": {
+            "show": true,
+            "sort": true
+        },
+        "joiningDate": {
+            "show": true,
+            "sort": true
+        },
+        "role": {
+            "show": true,
+            "sort": true
+        }
+    }
+]
